@@ -1,2 +1,2 @@
 # TrainingTasks
-solved tasks
+My solved tasks 
