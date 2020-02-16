@@ -1,7 +1,17 @@
 
 allprojects {
+    apply plugin: 'java'
+
+    version = '1.0'
+
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+
     repositories {
         jcenter()
     }
+}
+
+subprojects {
 }
 
