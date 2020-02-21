@@ -1,4 +1,4 @@
-
+apply plugin: "idea"
 allprojects {
     apply plugin: 'java'
 
@@ -8,10 +8,17 @@ allprojects {
     compileTestJava.options.encoding = 'UTF-8'
 
     repositories {
-        jcenter()
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
 subprojects {
+    dependencies {
+        testImplementation 'junit:junit:4.13'
+    }
 }
-
