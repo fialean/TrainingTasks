@@ -3,6 +3,8 @@ package section6.task1;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collection;
+
 import static org.junit.Assert.*;
 
 public class PairTest {
