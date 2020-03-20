@@ -1,14 +1,38 @@
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Есть строка, состоящая из слов. Все слова в ней разделены одним пробелом.
+ * Нужно преобразовать строку в такую структуру данных, которая группирует слова по первой букве в слове.
+ * Затем вывести только группы, содержащие более одного элемента. *
+ * Группы должны быть отсортированы в алфавитном порядке.
+ * Слова внутри группы нужно сортировать по убыванию количества символов; если количество символов равное,
+ * то сортировать в алфавитном порядке.
+ *
+ * Пример строки: String s = «сапог сарай арбуз болт бокс биржа»
+ *
+ * Отсортированная строка: [б=[биржа, бокс, болт], c=[caпог, сарай]]
+ */
 public class AbcString {
     public static void main(String[] args) {
         String s = "сапог сарай арбуз болт бокс биржа";
-        Stream.of(s.split(" ")).collect(
-                Collectors.groupingBy(s1 -> s1.substring(0, 1)))
-                .entrySet().stream().filter(map->map.getValue().size()!=1)
-                .collect(Collectors.joining(","))
-                .forEach(s3 -> System.out.println(s3));
+        System.out.println(new AbcString().sortedString(s));
+    }
 
+    private String sortedString(String s) {
+        return Stream.of(s.split(" "))
+                .collect(Collectors.groupingBy(s1 -> s1.charAt(0)))
+                .entrySet()
+                .stream()
+                .filter(m -> m.getValue().size() > 1)
+                .map(entry ->
+                        entry.getKey() + "=" + entry.getValue().stream()
+                                .sorted(Comparator.comparingInt(String::length)
+                                        .reversed()
+                                        .thenComparing(Comparator.naturalOrder())
+                                ).collect(Collectors.joining(",", "[", "]"))
+                )
+                .collect(Collectors.joining(",", "[", "]"));
     }
 }
