@@ -1,4 +1,4 @@
-package section6.test3;
+package section6.task3;
 
 import java.io.IOException;
 import java.io.InputStream;
